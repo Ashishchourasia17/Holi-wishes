@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Holi</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(45deg, #ffeb3b, #ff9800, #ff4081, #3f51b5);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+            text-align: center;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .message, .quote, .user-message {
+            opacity: 0;
+            display: none;
+        }
+        .message {
+            font-size: 60px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 3px 3px 6px #000;
+        }
+        .user-message {
+            font-size: 35px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-top: 15px;
+            text-shadow: 2px 2px 5px #000;
+        }
+        .quote {
+            font-size: 28px;
+            font-style: italic;
+            color: #f5f5f5;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .color-splash {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.8), rgba(0, 0, 0, 0));
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: splash 3s ease-out infinite;
+        }
+        @keyframes splash {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        .start-btn {
+            font-size: 20px;
+            padding: 10px 20px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            
+            bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <button class="start-btn" onclick="startCelebration()">Start Holi Celebration</button>
+    <div class="message">Happy Holi!</div>
+    <div class="quote">May this festival of colors bring joy, love, and happiness to your life!</div>
+    <div class="user-message" id="userMessage">Best wishes of Holi</div>
+    
+    <script>
+        function startCelebration() {
+            document.querySelector(".message").style.display = "block";
+            document.querySelector(".quote").style.display = "block";
+            document.querySelector(".user-message").style.display = "block";
+            document.querySelector(".message").style.animation = "fadeIn 3s ease-in-out forwards";
+            document.querySelector(".quote").style.animation = "fadeIn 4s ease-in-out forwards 2s";
+            document.querySelector(".user-message").style.animation = "fadeIn 3s ease-in-out forwards 1s";
+            document.querySelector(".start-btn").style.display = "none";
+            setInterval(createColorSplash, 500);
+        }
+        function createColorSplash() {
+            const colors = ["red", "blue", "green", "orange", "purple", "pink", "yellow", "cyan"]; 
+            const splash = document.createElement("div");
+            splash.classList.add("color-splash");
+            splash.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random() * colors.length)]}, rgba(0,0,0,0))`;
+            splash.style.left = Math.random() * window.innerWidth + "px";
+            splash.style.top = Math.random() * window.innerHeight + "px";
+            
+            document.body.appendChild(splash);
+            setTimeout(() => splash.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
